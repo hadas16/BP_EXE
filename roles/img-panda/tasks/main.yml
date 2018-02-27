@@ -1,0 +1,23 @@
+---
+- name: copy img-panda py file
+  copy: src=img-panda-app/img-panda.py dest=/usr/bin/ owner=root group=root mode=0755
+
+- name: copy img-panda sh file
+  copy: src=img-panda-app/img-panda.sh dest=/usr/bin/ owner=root group=root mode=0755
+
+- name: copy conf file to /etc/init
+  copy: src=img-panda-app/img-panda.conf dest=/etc/init/
+
+- name: create symlink
+  file:
+    src: /etc/init/img-panda.conf
+    dest: /etc/init.d/img-panda
+    state: link
+
+- name: chmod service file
+  shell: chmod +x /etc/init.d/img-panda
+
+- name: start service
+  service:
+    name: img-panda
+    state: started

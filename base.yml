@@ -1,14 +1,22 @@
 ---
-- name: Common tasks FTW
-  hosts: all
-  become: yes
-  pre_tasks:
-    - name: Set hostname
-      hostname: name={{inventory_hostname}}
+#- name: Common tasks FTW
+#  hosts: all
+#  become: yes
+#  pre_tasks:
+#    - name: Set hostname
+#      hostname: name={{inventory_hostname}}
+#
+#- name: Base bamboo service
+#  hosts: base
+#  become: yes
+#  roles:
+#    - { role: nodejs, tags: nodejs }
+#    - { role: bamboo, tags: bamboo }
 
-- name: Base bamboo service
-  hosts: base
+- name: Base img-panda service
+  hosts: 127.0.0.1
+  connection: local
   become: yes
   roles:
-    - { role: nodejs, tags: nodejs }
-    - { role: bamboo, tags: bamboo }
+    - img-panda
+    - smart-panda

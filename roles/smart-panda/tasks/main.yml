@@ -1,0 +1,23 @@
+---
+- name: copy smart-panda py file
+  copy: src=smart-panda-app/smart-panda.py dest=/usr/bin/ owner=root group=root mode=0755
+
+- name: copy smart-panda sh file
+  copy: src=smart-panda-app/smart-panda.sh dest=/usr/bin/ owner=root group=root mode=0755
+
+- name: copy conf file to /etc/init
+  copy: src=smart-panda-app/smart-panda.conf dest=/etc/init/
+
+- name: create symlink
+  file:
+    src: /etc/init/smart-panda.conf
+    dest: /etc/init.d/smart-panda
+    state: link
+
+- name: chmod service file
+  shell: chmod +x /etc/init.d/smart-panda
+
+- name: start service
+  service:
+    name: smart-panda
+    state: started
