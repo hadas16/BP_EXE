@@ -13,9 +13,15 @@
 #    - { role: nodejs, tags: nodejs }
 #    - { role: bamboo, tags: bamboo }
 
+- hosts: base
+  become: yes
+  tasks:
+    - name: "install flask"
+      pip:
+        name: flask
+ 
 - name: Base img-panda service
-  hosts: 127.0.0.1
-  connection: local
+  hosts: base
   become: yes
   roles:
     - img-panda

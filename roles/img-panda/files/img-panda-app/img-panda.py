@@ -1,4 +1,5 @@
 from flask import Flask, send_file
+import socket
 import os, random
 app = Flask(__name__)
 
@@ -7,4 +8,5 @@ def send_panda():
 	return random.choice(os.listdir("/resources"))
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', port=80)
+	ip = socket.gethostbyname(socket.gethostname())
+	app.run(host=ip, port=80)

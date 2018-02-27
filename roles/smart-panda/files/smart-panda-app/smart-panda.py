@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+import socket
 import os
 
 num_of_post_req = 0 
@@ -18,5 +19,6 @@ def smartpanda():
             return None
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', port=80)
+	ip = socket.gethostbyname(socket.gethostname())
+	app.run(host=ip, port=80)
         
